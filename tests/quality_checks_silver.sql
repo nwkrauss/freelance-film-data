@@ -57,7 +57,7 @@ GROUP BY job_name, job_position, start_date
 HAVING COUNT(*) > 1;
 
 -- 2.) Verifies start_date is populated
--- >> Expectation: No Result
+-- >> Expectation: No Results
 SELECT
 	job_name,
 	start_date
@@ -75,4 +75,22 @@ FROM (
 		job_position
 	FROM bronze.income)
 WHERE start_date IS NULL;
+
+-- 3.) Verifies end_date is populated
+-- >> Expectation: No Results
+SELECT
+	job_name,
+	end_date
+FROM (
+	SELECT
+		job_name,
+		CASE
+			WHEN end_date IS NULL
+			THEN RIGHT(date_string, 10)::DATE
+			ELSE end_date
+		END AS end_date,
+		date_string,
+		job_position
+	FROM bronze.income)
+WHERE end_date IS NULL;
 
