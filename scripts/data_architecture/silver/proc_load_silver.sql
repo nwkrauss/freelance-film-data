@@ -18,8 +18,6 @@ Usage Example:
 =====================================================================================
 */
 
--- SOMETHING IS WRONG, NOT WORKING
-
 CREATE OR REPLACE PROCEDURE silver.load_silver()
 LANGUAGE plpgsql
 AS $$
@@ -46,7 +44,7 @@ BEGIN
 
 		v_table_start := clock_timestamp();
 		RAISE NOTICE '>> Inserting Data Into: silver.income';
-		COPY silver.income(
+		INSERT INTO silver.income(
 				SELECT
 					job_name,
 					start_date,
@@ -119,7 +117,7 @@ BEGIN
 						) AS row_num
 					FROM bronze.income
 				) t
-				WHERE row_num = 1
+				WHERE row_num = 1);
 		RAISE NOTICE '>> Table silver.income >> Load Duration: % Seconds', EXTRACT (EPOCH FROM (clock_timestamp() - v_table_start));
 		RAISE NOTICE '>> -------------------------';
 
