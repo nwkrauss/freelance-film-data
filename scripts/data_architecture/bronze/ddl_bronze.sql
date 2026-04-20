@@ -11,7 +11,7 @@ Script Purpose:
 
 DROP TABLE IF EXISTS bronze.income;
 CREATE TABLE bronze.income (
-	job_name VARCHAR(200),
+	job_name VARCHAR(500),
 	start_date DATE,
 	end_date DATE,
 	date_string VARCHAR(200),
