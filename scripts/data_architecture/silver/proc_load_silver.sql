@@ -83,14 +83,13 @@ BEGIN
 						date_string,
 						start_date_if_equipment,
 						CASE 
-					        WHEN job_position ILIKE '%equipment%' OR job_position ILIKE '%covid%' OR job_name ILIKE '%kill%' THEN
-							0
+					        WHEN job_position ILIKE ANY (ARRAY['%equipment%', '%covid%'])
+								OR job_name ILIKE '%kill%' THEN 0
 							WHEN date_string LIKE '%;%' THEN
-					        REGEXP_COUNT(date_string, ';') + 1
+					        	REGEXP_COUNT(date_string, ';') + 1
 							WHEN date_string LIKE '%-%' THEN
-							REPLACE(SPLIT_PART(date_string, CASE WHEN date_string LIKE '%-%' THEN '-' ELSE ';' END, 2), ' ', '')::DATE - 
-							REPLACE(SPLIT_PART(date_string, CASE WHEN date_string LIKE '%-%' THEN '-' ELSE ';' END, 1), ' ', '')::DATE
-							+ 1
+								SPLIT_PART(date_string, '-', 2)::DATE - 
+								SPLIT_PART(date_string, '-', 1)::DATE + 1
 					        ELSE num_days 
 				    	END AS num_days,
 						job_position,
@@ -146,6 +145,3 @@ BEGIN
 
 END;
 $$;
-
--- Execute Silver Load:
-CALL silver.load_silver();
