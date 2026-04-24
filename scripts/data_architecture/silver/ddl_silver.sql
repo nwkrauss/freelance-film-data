@@ -29,5 +29,7 @@ CREATE TABLE silver.income (
 	between_date_1 DATE,
 	between_date_2 DATE,
 	between_date_3 DATE,
-	between_date_4 DATE
+	between_date_4 DATE,
+	job_key INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+	dwh_create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
