@@ -18,41 +18,13 @@ Usage Notes:
 */
 
 -- 1.) Checks for duplicate job_name entries
--- >> Expectation: May Return Results
-SELECT
-	job_name,
-	job_position,
-	start_date,
-	COUNT(*) AS occurrence
-FROM bronze.income
-GROUP BY job_name, job_position, start_date
-HAVING COUNT(*) > 1;
-
--- Removes duplicate job_name entries
 -- >> Expectation: No Results
 SELECT
 	job_name,
 	job_position,
 	start_date,
 	COUNT(*) AS occurrence
-FROM (
-SELECT
-	job_name,
-	job_position,
-	start_date
-FROM (
-	SELECT
-		job_name,
-		job_position,
-		start_date,
-		ROW_NUMBER() OVER(
-			PARTITION BY job_name, job_position
-			ORDER BY start_date
-		) AS row_num
-	FROM bronze.income
-) t
-WHERE row_num = 1
-)
+FROM silver.income
 GROUP BY job_name, job_position, start_date
 HAVING COUNT(*) > 1;
 
