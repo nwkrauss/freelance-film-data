@@ -28,25 +28,15 @@ FROM silver.income
 GROUP BY job_name, job_position, start_date
 HAVING COUNT(*) > 1;
 
--- 2.) Verifies start_date is populated
+-- 2.) Verifies start_date and end_date are populated
 -- >> Expectation: No Results
 SELECT
 	job_name,
-	start_date
-FROM (
-	SELECT
-		job_name,
-		CASE
-			WHEN UPPER(job_position) LIKE '%EQUIPMENT%'
-			OR UPPER(job_position) LIKE '%COVID%'
-			OR UPPER(job_name) LIKE '%KILL%'
-			THEN LEFT(date_string, 10)::DATE
-			ELSE start_date
-		END AS start_date,
-		date_string,
-		job_position
-	FROM bronze.income)
-WHERE start_date IS NULL;
+	start_date,
+	end_date
+FROM silver.income
+WHERE start_date IS NULL
+	OR end_date IS NULL;
 
 -- 3.) Verifies end_date is populated
 -- >> Expectation: No Results
