@@ -40,7 +40,7 @@ BEGIN
 		RAISE NOTICE '--------------------------------------------------';
 	
 		RAISE NOTICE '>> Truncating Table: silver.income';
-		TRUNCATE TABLE silver.income;
+		TRUNCATE TABLE silver.income RESTART IDENTITY;
 
 		v_table_start := clock_timestamp();
 		RAISE NOTICE '>> Inserting Data Into: silver.income';
@@ -116,7 +116,8 @@ BEGIN
 						) AS row_num
 					FROM bronze.income
 				) t
-				WHERE row_num = 1);
+				WHERE row_num = 1)
+				ORDER BY start_date;
 		RAISE NOTICE '>> Table silver.income >> Load Duration: % Seconds', EXTRACT (EPOCH FROM (clock_timestamp() - v_table_start));
 		RAISE NOTICE '>> -------------------------';
 
