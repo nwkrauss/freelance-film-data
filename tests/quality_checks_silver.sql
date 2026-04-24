@@ -38,21 +38,24 @@ FROM silver.income
 WHERE start_date IS NULL
 	OR end_date IS NULL;
 
--- 3.) Verifies end_date is populated
+-- 3.) Check for expected values in job_position
 -- >> Expectation: No Results
-SELECT
-	job_name,
-	end_date
-FROM (
-	SELECT
-		job_name,
-		CASE
-			WHEN end_date IS NULL
-			THEN RIGHT(date_string, 10)::DATE
-			ELSE end_date
-		END AS end_date,
-		date_string,
-		job_position
-	FROM bronze.income)
-WHERE end_date IS NULL;
+SELECT job_position
+FROM silver.income
+WHERE job_position NOT IN (
+	'Gaffer',
+	'DP',
+	'Grip',
+	'Teacher',
+	'BBE',
+	'Covid Stipend',
+	'Electric',
+	'BBG',
+	'Equipment Rental',
+	'Graphic Design',
+	'Photographer',
+	'Cam Op',
+	'G&E Swing',
+	'Key Grip'
+);
 
