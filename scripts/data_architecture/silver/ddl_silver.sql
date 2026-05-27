@@ -3,9 +3,9 @@
 DDL Script: Create Silver Table
 =====================================================================================
 Script Purpose:  
-    This script creates tables in the 'silver' schema, dropping existing tables if
-    they already exist.
-    Run this script to re-define the DDL of the 'bronze' tables.
+    This script creates a table in the 'silver' schema, dropping an existing table if
+    it already exists.
+    Run this script to re-define the DDL of the 'silver' table.
 =====================================================================================
 */
 
