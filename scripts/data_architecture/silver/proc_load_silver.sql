@@ -50,7 +50,6 @@ BEGIN
 					start_date,
 					end_date,
 					date_string,
-					start_date_if_equipment,
 					num_days,
 					job_position,
 					rate,
@@ -81,9 +80,8 @@ BEGIN
 							ELSE end_date
 						END AS end_date,
 						date_string,
-						start_date_if_equipment,
 						CASE 
-					        WHEN job_position ILIKE ANY (ARRAY['%equipment%', '%covid%'])
+					        WHEN job_position ILIKE ANY (ARRAY['%equipment%', '%covid%', '%meal%'])
 								OR job_name ILIKE '%kill%' THEN 0
 							WHEN date_string LIKE '%;%' THEN
 					        	REGEXP_COUNT(date_string, ';') + 1
