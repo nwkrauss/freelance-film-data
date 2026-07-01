@@ -100,7 +100,7 @@ CREATE OR REPLACE VIEW gold.yearly_report AS
 	    SELECT 
 	        y.year,
 	        y.gross_income,
-	        t.top_position,
+	        t.top_position, -- Added here
 			t.second_position,
 			t.third_position,
 	        LAG(y.gross_income) OVER (ORDER BY y.year) AS prev_year_income,
@@ -117,7 +117,7 @@ CREATE OR REPLACE VIEW gold.yearly_report AS
 			gross_income,
 			avg_yearly_income,
 			ROUND(
-				((gross_income - prev_year_income) / NULLIF(prev_year_income, 0)) * 100,
+				((gross_income::NUMERIC - prev_year_income) / NULLIF(prev_year_income, 0)) * 100,
 				2
 			) AS income_pc_from_previous,
 			total_days_worked,
@@ -221,7 +221,7 @@ CREATE OR REPLACE VIEW gold.monthly_report AS
 			avg_income_of_month,
 			avg_month_global,
 			ROUND(
-				((total_income - prev_month_income) / NULLIF(prev_month_income, 0)) * 100,
+				((total_income - prev_month_income)::NUMERIC / NULLIF(prev_month_income, 0)) * 100,
 				2
 			) AS income_pc_from_previous,
 			days_worked_this_month,
@@ -234,7 +234,7 @@ CREATE OR REPLACE VIEW gold.monthly_report AS
 		CONCAT (TO_CHAR(month_date, 'Mon'), ' ', year) AS month_key,
 		EXTRACT(MONTH from month_date) AS month,
 		year,
-	    total_income,
+	    total_income::NUMERIC,
 		income_pc_from_previous,
 		days_worked_this_month,
 		CASE
