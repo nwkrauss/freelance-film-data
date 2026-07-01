@@ -48,7 +48,6 @@ BEGIN
 				start_date,
 				end_date,
 				date_string,
-				start_date_if_equipment,
 				num_days,
 				job_position,
 				rate,
