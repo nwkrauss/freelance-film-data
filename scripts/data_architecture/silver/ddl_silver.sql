@@ -9,23 +9,22 @@ Script Purpose:
 =====================================================================================
 */
 
-DROP TABLE IF EXISTS silver.income;
+DROP TABLE IF EXISTS silver.income CASCADE;
 CREATE TABLE silver.income (
-	job_name VARCHAR(500),
+	job_name VARCHAR(200),
 	start_date DATE,
 	end_date DATE,
 	date_string VARCHAR(200),
-	start_date_if_equipment DATE,
 	num_days INT,
 	job_position VARCHAR(50),
-	rate INT,
+	rate VARCHAR(50),
 	per_hours INT,
 	notes VARCHAR(200),
-	gross_1099 NUMERIC,
-	gross_w2 NUMERIC,
-	net_w2 NUMERIC,
+	gross_1099 INT,
+	gross_w2 INT,
+	net_w2 INT,
 	tax_structure VARCHAR(10),
-	payroll_name VARCHAR(200),
+	payroll_name VARCHAR(999),
 	between_date_1 DATE,
 	between_date_2 DATE,
 	between_date_3 DATE,
