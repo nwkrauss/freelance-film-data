@@ -5,7 +5,7 @@
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="4M5XmsSJ-BQqHId1-842-1" parent="1" style="whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#1A1A1A);strokeColor=none;" value="" vertex="1">
-          <mxGeometry height="529" width="480" x="-580" y="181" as="geometry" />
+          <mxGeometry height="569" width="480" x="-580" y="181" as="geometry" />
         </mxCell>
         <mxCell id="4M5XmsSJ-BQqHId1-842-2" parent="1" style="shape=table;startSize=60;container=1;collapsible=0;childLayout=tableLayout;fixedHeader=1;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=30;fontColor=default;fillColor=light-dark(#FFFFFF,#1A1A1A);fontStyle=1;strokeColor=light-dark(#000000,#808080);strokeWidth=2;whiteSpace=wrap;labelBackgroundColor=none;labelBorderColor=none;" value="investment splits" vertex="1">
           <mxGeometry height="567" width="482" x="-580" y="180" as="geometry" />
